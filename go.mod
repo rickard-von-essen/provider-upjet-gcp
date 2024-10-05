@@ -6,6 +6,8 @@ module github.com/upbound/provider-gcp
 
 go 1.21
 
+replace github.com/crossplane/upjet => /Users/ext.rickard.von/src/upjet
+
 require (
 	dario.cat/mergo v1.0.0
 	github.com/crossplane/crossplane-runtime v1.16.0-rc.2.0.20240510094504-3f697876fa57
