@@ -2097,6 +2097,45 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  instanceFlexibilityPolicy:
+                    description: The flexibility policy for managed instance group.
+                      Instance flexibility allows managed instance group to create
+                      VMs from multiple types of machines. Instance flexibility configuration
+                      on managed instance group overrides instance template configuration.
+                      Structure is documented below.
+                    properties:
+                      instanceSelections:
+                        description: ', Named instance selections configuring properties
+                          that the group will use when creating new VMs. One can specify
+                          multiple instance selection to allow managed instance group
+                          to create VMs from multiple types of machines, based on
+                          preference and availability. Structure is documented below.'
+                        items:
+                          properties:
+                            machineTypes:
+                              description: ', A list of full machine-type names, e.g.
+                                "n1-standard-16".'
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            name:
+                              description: ', Name of the instance selection, e.g.
+                                instance_selection_with_n1_machines_types. Instance
+                                selection names must be unique within the flexibility
+                                policy.'
+                              type: string
+                            rank:
+                              description: ', Preference of this instance selection.
+                                Lower number means higher preference. Managed instance
+                                group will first try to create a VM based on the machine-type
+                                with lowest rank and fallback to next rank based on
+                                availability. Machine types and instance selections
+                                with the same rank have the same preference.'
+                              type: number
+                          type: object
+                        type: array
+                    type: object
                   instanceLifecyclePolicy:
                     properties:
                       defaultActionOnFailure:
@@ -2658,6 +2697,45 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  instanceFlexibilityPolicy:
+                    description: The flexibility policy for managed instance group.
+                      Instance flexibility allows managed instance group to create
+                      VMs from multiple types of machines. Instance flexibility configuration
+                      on managed instance group overrides instance template configuration.
+                      Structure is documented below.
+                    properties:
+                      instanceSelections:
+                        description: ', Named instance selections configuring properties
+                          that the group will use when creating new VMs. One can specify
+                          multiple instance selection to allow managed instance group
+                          to create VMs from multiple types of machines, based on
+                          preference and availability. Structure is documented below.'
+                        items:
+                          properties:
+                            machineTypes:
+                              description: ', A list of full machine-type names, e.g.
+                                "n1-standard-16".'
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            name:
+                              description: ', Name of the instance selection, e.g.
+                                instance_selection_with_n1_machines_types. Instance
+                                selection names must be unique within the flexibility
+                                policy.'
+                              type: string
+                            rank:
+                              description: ', Preference of this instance selection.
+                                Lower number means higher preference. Managed instance
+                                group will first try to create a VM based on the machine-type
+                                with lowest rank and fallback to next rank based on
+                                availability. Machine types and instance selections
+                                with the same rank have the same preference.'
+                              type: number
+                          type: object
+                        type: array
+                    type: object
                   instanceLifecyclePolicy:
                     properties:
                       defaultActionOnFailure:
@@ -3329,10 +3407,52 @@ spec:
                   id:
                     description: an identifier for the resource with format projects/{{project}}/regions/{{region}}/instanceGroupManagers/{{name}}
                     type: string
+                  instanceFlexibilityPolicy:
+                    description: The flexibility policy for managed instance group.
+                      Instance flexibility allows managed instance group to create
+                      VMs from multiple types of machines. Instance flexibility configuration
+                      on managed instance group overrides instance template configuration.
+                      Structure is documented below.
+                    properties:
+                      instanceSelections:
+                        description: ', Named instance selections configuring properties
+                          that the group will use when creating new VMs. One can specify
+                          multiple instance selection to allow managed instance group
+                          to create VMs from multiple types of machines, based on
+                          preference and availability. Structure is documented below.'
+                        items:
+                          properties:
+                            machineTypes:
+                              description: ', A list of full machine-type names, e.g.
+                                "n1-standard-16".'
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            name:
+                              description: ', Name of the instance selection, e.g.
+                                instance_selection_with_n1_machines_types. Instance
+                                selection names must be unique within the flexibility
+                                policy.'
+                              type: string
+                            rank:
+                              description: ', Preference of this instance selection.
+                                Lower number means higher preference. Managed instance
+                                group will first try to create a VM based on the machine-type
+                                with lowest rank and fallback to next rank based on
+                                availability. Machine types and instance selections
+                                with the same rank have the same preference.'
+                              type: number
+                          type: object
+                        type: array
+                    type: object
                   instanceGroup:
                     description: The full URL of the instance group created by the
                       manager.
                     type: string
+                  instanceGroupManagerId:
+                    description: an identifier for the resource with format projects/{{project}}/regions/{{region}}/instanceGroupManagers/{{name}}
+                    type: number
                   instanceLifecyclePolicy:
                     properties:
                       defaultActionOnFailure:

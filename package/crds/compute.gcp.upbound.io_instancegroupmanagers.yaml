@@ -3140,6 +3140,9 @@ spec:
                     description: The full URL of the instance group created by the
                       manager.
                     type: string
+                  instanceGroupManagerId:
+                    description: an identifier for the resource with format projects/{{project}}/zones/{{zone}}/instanceGroupManagers/{{name}}
+                    type: number
                   instanceLifecyclePolicy:
                     properties:
                       defaultActionOnFailure:

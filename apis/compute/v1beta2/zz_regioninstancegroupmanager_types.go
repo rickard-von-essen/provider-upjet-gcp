@@ -13,6 +13,67 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type InstanceFlexibilityPolicyInitParameters struct {
+
+	// , Named instance selections configuring properties that the group will use when creating new VMs. One can specify multiple instance selection to allow managed instance group to create VMs from multiple types of machines, based on preference and availability. Structure is documented below.
+	InstanceSelections []InstanceSelectionsInitParameters `json:"instanceSelections,omitempty" tf:"instance_selections,omitempty"`
+}
+
+type InstanceFlexibilityPolicyObservation struct {
+
+	// , Named instance selections configuring properties that the group will use when creating new VMs. One can specify multiple instance selection to allow managed instance group to create VMs from multiple types of machines, based on preference and availability. Structure is documented below.
+	InstanceSelections []InstanceSelectionsObservation `json:"instanceSelections,omitempty" tf:"instance_selections,omitempty"`
+}
+
+type InstanceFlexibilityPolicyParameters struct {
+
+	// , Named instance selections configuring properties that the group will use when creating new VMs. One can specify multiple instance selection to allow managed instance group to create VMs from multiple types of machines, based on preference and availability. Structure is documented below.
+	// +kubebuilder:validation:Optional
+	InstanceSelections []InstanceSelectionsParameters `json:"instanceSelections,omitempty" tf:"instance_selections,omitempty"`
+}
+
+type InstanceSelectionsInitParameters struct {
+
+	// , A list of full machine-type names, e.g. "n1-standard-16".
+	// +listType=set
+	MachineTypes []*string `json:"machineTypes,omitempty" tf:"machine_types,omitempty"`
+
+	// , Name of the instance selection, e.g. instance_selection_with_n1_machines_types. Instance selection names must be unique within the flexibility policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// , Preference of this instance selection. Lower number means higher preference. Managed instance group will first try to create a VM based on the machine-type with lowest rank and fallback to next rank based on availability. Machine types and instance selections with the same rank have the same preference.
+	Rank *float64 `json:"rank,omitempty" tf:"rank,omitempty"`
+}
+
+type InstanceSelectionsObservation struct {
+
+	// , A list of full machine-type names, e.g. "n1-standard-16".
+	// +listType=set
+	MachineTypes []*string `json:"machineTypes,omitempty" tf:"machine_types,omitempty"`
+
+	// , Name of the instance selection, e.g. instance_selection_with_n1_machines_types. Instance selection names must be unique within the flexibility policy.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// , Preference of this instance selection. Lower number means higher preference. Managed instance group will first try to create a VM based on the machine-type with lowest rank and fallback to next rank based on availability. Machine types and instance selections with the same rank have the same preference.
+	Rank *float64 `json:"rank,omitempty" tf:"rank,omitempty"`
+}
+
+type InstanceSelectionsParameters struct {
+
+	// , A list of full machine-type names, e.g. "n1-standard-16".
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	MachineTypes []*string `json:"machineTypes" tf:"machine_types,omitempty"`
+
+	// , Name of the instance selection, e.g. instance_selection_with_n1_machines_types. Instance selection names must be unique within the flexibility policy.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// , Preference of this instance selection. Lower number means higher preference. Managed instance group will first try to create a VM based on the machine-type with lowest rank and fallback to next rank based on availability. Machine types and instance selections with the same rank have the same preference.
+	// +kubebuilder:validation:Optional
+	Rank *float64 `json:"rank,omitempty" tf:"rank,omitempty"`
+}
+
 type RegionInstanceGroupManagerAllInstancesConfigInitParameters struct {
 
 	// , The label key-value pairs that you want to patch onto the instance.
@@ -130,6 +191,9 @@ type RegionInstanceGroupManagerInitParameters struct {
 	// group. You can specify one or more values. For more information, see the official documentation.
 	// +listType=set
 	DistributionPolicyZones []*string `json:"distributionPolicyZones,omitempty" tf:"distribution_policy_zones,omitempty"`
+
+	// The flexibility policy for managed instance group. Instance flexibility allows managed instance group to create VMs from multiple types of machines. Instance flexibility configuration on managed instance group overrides instance template configuration. Structure is documented below.
+	InstanceFlexibilityPolicy *InstanceFlexibilityPolicyInitParameters `json:"instanceFlexibilityPolicy,omitempty" tf:"instance_flexibility_policy,omitempty"`
 
 	InstanceLifecyclePolicy *RegionInstanceGroupManagerInstanceLifecyclePolicyInitParameters `json:"instanceLifecyclePolicy,omitempty" tf:"instance_lifecycle_policy,omitempty"`
 
@@ -306,8 +370,14 @@ type RegionInstanceGroupManagerObservation struct {
 	// an identifier for the resource with format projects/{{project}}/regions/{{region}}/instanceGroupManagers/{{name}}
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The flexibility policy for managed instance group. Instance flexibility allows managed instance group to create VMs from multiple types of machines. Instance flexibility configuration on managed instance group overrides instance template configuration. Structure is documented below.
+	InstanceFlexibilityPolicy *InstanceFlexibilityPolicyObservation `json:"instanceFlexibilityPolicy,omitempty" tf:"instance_flexibility_policy,omitempty"`
+
 	// The full URL of the instance group created by the manager.
 	InstanceGroup *string `json:"instanceGroup,omitempty" tf:"instance_group,omitempty"`
+
+	// an identifier for the resource with format projects/{{project}}/regions/{{region}}/instanceGroupManagers/{{name}}
+	InstanceGroupManagerID *float64 `json:"instanceGroupManagerId,omitempty" tf:"instance_group_manager_id,omitempty"`
 
 	InstanceLifecyclePolicy *RegionInstanceGroupManagerInstanceLifecyclePolicyObservation `json:"instanceLifecyclePolicy,omitempty" tf:"instance_lifecycle_policy,omitempty"`
 
@@ -417,6 +487,10 @@ type RegionInstanceGroupManagerParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	DistributionPolicyZones []*string `json:"distributionPolicyZones,omitempty" tf:"distribution_policy_zones,omitempty"`
+
+	// The flexibility policy for managed instance group. Instance flexibility allows managed instance group to create VMs from multiple types of machines. Instance flexibility configuration on managed instance group overrides instance template configuration. Structure is documented below.
+	// +kubebuilder:validation:Optional
+	InstanceFlexibilityPolicy *InstanceFlexibilityPolicyParameters `json:"instanceFlexibilityPolicy,omitempty" tf:"instance_flexibility_policy,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	InstanceLifecyclePolicy *RegionInstanceGroupManagerInstanceLifecyclePolicyParameters `json:"instanceLifecyclePolicy,omitempty" tf:"instance_lifecycle_policy,omitempty"`

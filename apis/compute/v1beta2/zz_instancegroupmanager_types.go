@@ -226,6 +226,9 @@ type InstanceGroupManagerObservation struct {
 	// The full URL of the instance group created by the manager.
 	InstanceGroup *string `json:"instanceGroup,omitempty" tf:"instance_group,omitempty"`
 
+	// an identifier for the resource with format projects/{{project}}/zones/{{zone}}/instanceGroupManagers/{{name}}
+	InstanceGroupManagerID *float64 `json:"instanceGroupManagerId,omitempty" tf:"instance_group_manager_id,omitempty"`
+
 	InstanceLifecyclePolicy *InstanceLifecyclePolicyObservation `json:"instanceLifecyclePolicy,omitempty" tf:"instance_lifecycle_policy,omitempty"`
 
 	// Pagination behavior of the listManagedInstances API
