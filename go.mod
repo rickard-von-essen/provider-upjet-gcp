@@ -6,8 +6,6 @@ module github.com/upbound/provider-gcp
 
 go 1.23
 
-replace github.com/hashicorp/terraform-provider-google => /Users/ext.rickard.von/src/terraform-provider-google
-
 require (
 	dario.cat/mergo v1.0.0
 	github.com/crossplane/crossplane-runtime v1.17.0
@@ -15,7 +13,7 @@ require (
 	github.com/crossplane/upjet v1.4.1-0.20250108142216-db86f70a1651
 	github.com/hashicorp/terraform-json v0.22.1
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.33.0
-	github.com/hashicorp/terraform-provider-google v1.20.1-0.20241111170140-c875b30c3ae6
+	github.com/hashicorp/terraform-provider-google v1.20.1-0.20250106194616-7ec3b288762c
 	github.com/pkg/errors v0.9.1
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	k8s.io/apimachinery v0.30.0
